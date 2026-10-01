@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#13495C"></rect><rect x="30" y="30" width="40" height="40" fill="none" stroke="#fff" stroke-width="3"></rect><text x="50" y="57" font-family="sans-serif" font-weight="700" font-size="16" fill="#fff" text-anchor="middle">US</text></svg></template>
+<meta name="ext-resource-dependency" content="assets/cat-wood-stove.jpg">
+<meta name="ext-resource-dependency" content="assets/cat-pellet-stove.jpeg">
+<meta name="ext-resource-dependency" content="assets/cat-wood-furnace.jpg">
+<meta name="ext-resource-dependency" content="assets/cat-heater-c190k.jpg">
+<meta name="ext-resource-dependency" content="assets/cat-coal-stove.jpg">
+<meta name="ext-resource-dependency" content="assets/cat-fire-pit.jpeg">
+<meta name="ext-resource-dependency" content="assets/cat-circulator.jpg">
+<meta name="ext-resource-dependency" content="assets/cat-camp-stove.jpeg">
+<meta name="ext-resource-dependency" content="assets/cat-pellets.jpg">
+<meta name="ext-resource-dependency" content="assets/cat-parts.jpeg">
+<meta name="ext-resource-dependency" content="assets/video-assemble-wood-stove.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=Barlow:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:rgb(24,26,29);font-family:'Ringside Regular','Ringside','Barlow',-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:rgb(24,26,29);text-decoration:underline;text-underline-offset:3px}
+a:hover{color:#13495C}
+button{font-family:inherit;cursor:pointer}
+input,select{font-family:inherit}
+::-webkit-scrollbar{height:0;width:0}
+</style>
+</helmet>
+
+<div style="min-height:100vh;display:flex;flex-direction:column;background:#fff">
+<div aria-hidden="true" style="display:none"><img data-asset="assets/cat-wood-stove.jpg" src="assets/cat-wood-stove.jpg" alt=""><img data-asset="assets/cat-pellet-stove.jpeg" src="assets/cat-pellet-stove.jpeg" alt=""><img data-asset="assets/cat-wood-furnace.jpg" src="assets/cat-wood-furnace.jpg" alt=""><img data-asset="assets/cat-heater-c190k.jpg" src="assets/cat-heater-c190k.jpg" alt=""><img data-asset="assets/cat-coal-stove.jpg" src="assets/cat-coal-stove.jpg" alt=""><img data-asset="assets/cat-fire-pit.jpeg" src="assets/cat-fire-pit.jpeg" alt=""><img data-asset="assets/cat-circulator.jpg" src="assets/cat-circulator.jpg" alt=""><img data-asset="assets/cat-camp-stove.jpeg" src="assets/cat-camp-stove.jpeg" alt=""><img data-asset="assets/cat-pellets.jpg" src="assets/cat-pellets.jpg" alt=""><img data-asset="assets/cat-parts.jpeg" src="assets/cat-parts.jpeg" alt=""><img data-asset="assets/video-assemble-wood-stove.png" src="assets/video-assemble-wood-stove.png" alt=""></div>
+
+
+<!-- Announcement bar -->
+<div style="background:#13495C;color:#fff;font-size:13px;line-height:18px;text-align:center;padding:10px 16px;text-wrap:pretty">
+  <span>Heating season sale: up to 20% off select wood &amp; pellet stoves.</span>
+  <span onClick="{{ goSale }}" style="font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer;margin-left:6px">Shop now</span>
+</div>
+
+<!-- Header -->
+<header style="position:sticky;top:0;z-index:40;background:rgb(24,26,29);color:#fff">
+  <div style="max-width:1440px;margin:0 auto;padding:0 clamp(12px,3vw,32px);height:64px;display:flex;align-items:center;gap:16px">
+    <sc-if value="{{ narrow }}" hint-placeholder-val="{{ true }}">
+      <button onClick="{{ openMenu }}" aria-label="Menu" style="width:44px;height:44px;margin-left:-8px;background:none;border:0;color:#fff;display:flex;align-items:center;justify-content:center">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+      </button>
+    </sc-if>
+    <img src="assets/us-stove-logo.jpeg" alt="United States Stove Co. Est. 1869" onClick="{{ goHome }}" style="height:40px;width:auto;display:block;cursor:pointer;flex:none">
+    <sc-if value="{{ wide }}" hint-placeholder-val="{{ false }}">
+      <nav style="flex:1;display:flex;justify-content:center;gap:4px;min-width:0">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="7">
+          <span onClick="{{ n.go }}" style="font-size:13px;font-weight:500;padding:8px 10px;border-radius:6px;cursor:pointer;white-space:nowrap;color:{{ n.color }}" style-hover="background:rgba(255,255,255,0.08)">{{ n.label }}</span>
+        </sc-for>
+      </nav>
+    </sc-if>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:2px">
+      <button aria-label="Search" style="width:44px;height:44px;background:none;border:0;color:#fff;display:flex;align-items:center;justify-content:center">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+      </button>
+      <button aria-label="Account" style="width:44px;height:44px;background:none;border:0;color:#fff;display:flex;align-items:center;justify-content:center">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"></path></svg>
+      </button>
+      <button onClick="{{ openCart }}" aria-label="Cart" style="position:relative;width:44px;height:44px;margin-right:-8px;background:none;border:0;color:#fff;display:flex;align-items:center;justify-content:center">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 7h14l-1.2 12.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 7z"></path><path d="M9 7V5a3 3 0 0 1 6 0v2"></path></svg>
+        <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
+          <span style="position:absolute;top:6px;right:4px;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:#13495C;color:#fff;font-size:11px;font-weight:600;line-height:18px;text-align:center">{{ cartCount }}</span>
+        </sc-if>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main style="flex:1">
+
+<!-- ================= HOME ================= -->
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+
+  <!-- Hero -->
+  <section data-screen-label="Home" style="position:relative;min-height:clamp(560px,min(56.25vw,82vh),760px);display:flex;align-items:center;background:#1c1714;color:#fff;overflow:hidden">
+    <img src="assets/hero-wood-stove.jpeg" alt="United States Stove wood stove burning in a living room" fetchpriority="high" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:64% 50%;display:block">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.25) 100%),linear-gradient(90deg,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.35) 45%,rgba(0,0,0,0) 75%)"></div>
+    <div style="position:relative;width:100%;max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(16px,4vw,40px)">
+      <div style="font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:14px">Heating season sale · Ends Nov 30</div>
+      <h1 style="margin:0;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,5.4vw,64px);line-height:1;letter-spacing:0.005em;max-width:14ch;text-wrap:balance">Real fire. Real heat. Since 1869.</h1>
+      <p style="margin:18px 0 0;font-size:clamp(16px,1.6vw,18px);line-height:1.5;max-width:520px;color:rgba(255,255,255,0.88);text-wrap:pretty">Wood, pellet, coal and gas heat for every home, cabin and shop. Up to 20% off select stoves this season.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:28px">
+        <button onClick="{{ goSale }}" style="height:53px;padding:0 32px;border-radius:28px;border:0;background:#13495C;color:#fff;font-size:15px;font-weight:600" style-hover="background:#0E3746">Shop the sale</button>
+        <button onClick="{{ goWood }}" style="height:53px;padding:0 32px;border-radius:28px;border:1px solid #fff;background:transparent;color:#fff;font-size:15px;font-weight:600" style-hover="background:rgba(255,255,255,0.12)">Find your stove</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category rail -->
+  <section style="background:rgb(245,247,249);padding:clamp(32px,5vw,56px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px);display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:20px">
+      <h2 style="margin:0;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(28px,3.4vw,40px);line-height:1">Shop by category</h2>
+      <span onClick="{{ goWood }}" style="font-size:14px;font-weight:500;text-decoration:underline;text-underline-offset:3px;cursor:pointer;white-space:nowrap">View all</span>
+    </div>
+    <div style="max-width:1280px;margin:0 auto;display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 clamp(16px,4vw,40px) 4px;scroll-padding:0 clamp(16px,4vw,40px)">
+      <sc-for list="{{ categories }}" as="c" hint-placeholder-count="10">
+        <div onClick="{{ c.go }}" style="flex:none;width:clamp(144px,38vw,184px);scroll-snap-align:start;background:#fff;border-radius:12px;padding:10px 10px 14px;display:flex;flex-direction:column;gap:12px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,0.05)" style-hover="box-shadow:0 4px 16px rgba(0,0,0,0.12)">
+          <sc-if value="{{ c.hasSrc }}" hint-placeholder-val="{{ true }}">
+            <div style="aspect-ratio:1/1;border-radius:8px;background:#fff;overflow:hidden;display:flex;align-items:center;justify-content:center">
+              <img src="{{ c.src }}" alt="{{ c.name }}" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block">
+            </div>
+          </sc-if>
+          <sc-if value="{{ c.noSrc }}" hint-placeholder-val="{{ false }}">
+            <div style="aspect-ratio:1/1;border-radius:8px;background:repeating-linear-gradient(135deg,#eceef0 0 10px,#f5f7f9 10px 20px);display:flex;align-items:center;justify-content:center;padding:8px;text-align:center">
+              <span style="font:10px ui-monospace,Menlo,monospace;color:rgb(101,102,106)">{{ c.img }}</span>
+            </div>
+          </sc-if>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;padding:0 4px">
+            <span style="font-size:14px;font-weight:500;line-height:1.25">{{ c.name }}</span>
+            <span style="flex:none;width:22px;height:22px;border-radius:11px;border:1px solid rgb(136,139,147);display:flex;align-items:center;justify-content:center">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 5l7 7-7 7"></path></svg>
+            </span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Featured collection tabs -->
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(16px,4vw,40px)">
+    <h2 style="margin:0 0 18px;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(28px,3.4vw,40px);line-height:1">Save big this heating season</h2>
+    <div style="display:inline-flex;gap:4px;padding:4px;border-radius:28px;background:rgb(245,247,249);margin-bottom:24px;max-width:100%;overflow-x:auto">
+      <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="3">
+        <button onClick="{{ t.go }}" style="height:40px;padding:0 20px;border-radius:24px;font-size:14px;font-weight:500;white-space:nowrap;border:1px solid {{ t.border }};background:{{ t.bg }};color:rgb(24,26,29)">{{ t.label }}</button>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(calc(50% - 8px),260px),1fr));gap:28px 16px">
+      <sc-for list="{{ tabProducts }}" as="p" hint-placeholder-count="4">
+        <div onClick="{{ p.open }}" style="display:flex;flex-direction:column;gap:12px;cursor:pointer;min-width:0">
+          <div style="position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#fff;box-shadow:inset 0 0 0 1px rgb(228,230,231)">
+            <img src="{{ p.src }}" alt="{{ p.name }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8%;box-sizing:border-box;display:block">
+            <sc-if value="{{ p.onSale }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:10px;left:10px;background:#13495C;color:#fff;font-size:11px;font-weight:600;padding:4px 8px;border-radius:4px">{{ p.badge }}</span></sc-if>
+            <button onClick="{{ p.add }}" aria-label="Quick add" style="position:absolute;right:10px;bottom:10px;width:40px;height:40px;border-radius:20px;border:0;background:#fff;color:rgb(24,26,29);box-shadow:0 2px 8px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center" style-hover="background:rgb(24,26,29);color:#fff">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"></path></svg>
+            </button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;padding:0 2px">
+            <span style="font-size:12px;color:rgb(101,102,106)">{{ p.spec }}</span>
+            <span style="font-size:15px;font-weight:500;line-height:1.3;text-wrap:pretty">{{ p.name }}</span>
+            <span style="font-size:12px;color:rgb(101,102,106)">★ {{ p.rating }} ({{ p.reviews }})</span>
+            <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:2px">
+              <span style="font-size:16px;font-weight:600;color:{{ p.priceColor }}">{{ p.priceF }}</span>
+              <sc-if value="{{ p.onSale }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:rgb(136,139,147);text-decoration:line-through">{{ p.wasF }}</span></sc-if>
+            </div>
+            <span style="font-size:12px;color:rgb(101,102,106)">or {{ p.monthly }}/mo with financing</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- Value props -->
+  <section style="background:rgb(24,26,29);color:#fff;padding:clamp(44px,6vw,72px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px)">
+      <h2 style="margin:0 0 clamp(28px,4vw,44px);text-align:center;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(28px,3.4vw,40px);line-height:1">Easy to buy. Built to last.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(calc(50% - 12px),240px),1fr));gap:32px 24px">
+        <sc-for list="{{ perks }}" as="v" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px">
+            <span style="width:44px;height:44px;border-radius:22px;border:1px solid rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;font-size:18px">{{ v.n }}</span>
+            <span style="font-size:15px;font-weight:600">{{ v.title }}</span>
+            <span style="font-size:13px;line-height:1.5;color:rgb(168,172,177);max-width:260px;text-wrap:pretty">{{ v.body }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section style="background:rgb(245,247,249);padding:clamp(44px,6vw,72px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px)">
+      <h2 style="margin:0 0 28px;text-align:center;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(28px,3.4vw,40px);line-height:1">Homeowners who heat with us</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+        <sc-for list="{{ testimonials }}" as="r" hint-placeholder-count="3">
+          <figure style="margin:0;background:#fff;border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:16px;box-shadow:0 1px 2px rgba(0,0,0,0.05)">
+            <span style="color:#13495C;font-size:14px;letter-spacing:2px">★★★★★</span>
+            <blockquote style="margin:0;font-size:clamp(18px,1.8vw,22px);font-weight:600;line-height:1.35;text-wrap:pretty">“{{ r.quote }}”</blockquote>
+            <figcaption style="margin-top:auto;font-size:13px;color:rgb(101,102,106)">{{ r.who }} · {{ r.product }}</figcaption>
+          </figure>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- Heritage / image with text -->
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(44px,6vw,80px) clamp(16px,4vw,40px);display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px);align-items:center">
+    <div style="flex:1 1 min(100%,460px);aspect-ratio:5/4;border-radius:12px;overflow:hidden;background:#2a211a">
+      <img src="assets/our-history.jpeg" alt="Antique cast iron parlor stove in a farmhouse living room" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:60% 50%;display:block">
+    </div>
+    <div style="flex:1 1 min(100%,380px);display:flex;flex-direction:column;gap:16px">
+      <span style="font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#13495C">Our story</span>
+      <h2 style="margin:0;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,4.4vw,56px);line-height:0.98;text-wrap:balance">Keeping American homes warm for over 150 years</h2>
+      <p style="margin:0;font-size:16px;line-height:1.6;color:rgb(101,102,106);text-wrap:pretty">Founded in 1869 and headquartered in South Pittsburg, Tennessee, United States Stove Company builds dependable heat for every fuel and every space, backed by parts and support for the long haul.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:8px">
+        <button style="height:53px;padding:0 32px;border-radius:28px;border:1px solid rgb(24,26,29);background:transparent;color:rgb(24,26,29);font-size:15px;font-weight:600" style-hover="background:rgb(24,26,29);color:#fff">Read our story</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outdoor banner -->
+  <section style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px) clamp(44px,6vw,80px)">
+    <div style="position:relative;border-radius:12px;overflow:hidden;min-height:clamp(380px,46vw,520px);display:flex;align-items:center;justify-content:center;text-align:center;background:#1d2318;color:#fff;padding:40px 20px">
+      <img src="assets/outdoor-firepit-lifestyle.jpg" alt="Smokeless fire pit burning at a campsite" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:45% 55%;display:block">
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.45)"></div>
+      <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:14px;max-width:560px">
+        <span style="font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase">Outdoor living</span>
+        <h2 style="margin:0;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(36px,5vw,64px);line-height:0.95">Take the fire outside</h2>
+        <p style="margin:0;font-size:16px;line-height:1.5;color:rgba(255,255,255,0.88);text-wrap:pretty">Fire pits for the backyard and camp stoves for the trail, hunting cabin or job site.</p>
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:10px">
+          <button onClick="{{ goFirePits }}" style="height:48px;padding:0 28px;border-radius:28px;border:0;background:#fff;color:rgb(24,26,29);font-size:15px;font-weight:600">Shop fire pits</button>
+          <button onClick="{{ goCamp }}" style="height:48px;padding:0 28px;border-radius:28px;border:1px solid #fff;background:transparent;color:#fff;font-size:15px;font-weight:600">Shop camp stoves</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How-to videos -->
+  <section style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px) clamp(48px,6vw,88px)">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:8px">
+      <h2 style="margin:0;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(28px,3.4vw,40px);line-height:1">How-to videos</h2>
+      <a href="https://www.youtube.com/@usstove" target="_blank" rel="noopener" style="font-size:14px;font-weight:500;white-space:nowrap">View all on YouTube</a>
+    </div>
+    <p style="margin:0 0 24px;font-size:15px;line-height:1.5;color:rgb(101,102,106);max-width:560px;text-wrap:pretty">Step-by-step help with assembly, installation and upkeep from our team.</p>
+    <div style="display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 calc(-1 * clamp(16px,4vw,40px));padding:0 clamp(16px,4vw,40px) 4px;scroll-padding:0 clamp(16px,4vw,40px)">
+      <sc-for list="{{ videos }}" as="v" hint-placeholder-count="4">
+        <a href="{{ v.url }}" target="_blank" rel="noopener" style="flex:none;width:clamp(260px,78vw,300px);scroll-snap-align:start;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:rgb(24,26,29)">
+          <div style="position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#D63F45">
+            <sc-if value="{{ v.hasThumb }}" hint-placeholder-val="{{ false }}">
+              <img loading="lazy" src="{{ v.thumb }}" alt="{{ v.title }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+            </sc-if>
+            <sc-if value="{{ v.noThumb }}" hint-placeholder-val="{{ true }}">
+              <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 45%,#E0474D 0%,#C9282F 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px 16px;text-align:center;color:#fff">
+                <div style="border:2px solid #fff;padding:5px 10px;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;font-size:11px;line-height:1;text-transform:uppercase;letter-spacing:0.02em">United States<br>Stove Co.</div>
+                <div style="font-weight:700;font-size:15px;line-height:1.15;text-wrap:balance">How to:<br>{{ v.short }}</div>
+              </div>
+            </sc-if>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.08)" style-hover="background:rgba(0,0,0,0.2)">
+              <span style="width:56px;height:40px;border-radius:10px;background:rgba(24,26,29,0.82);display:flex;align-items:center;justify-content:center">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"></path></svg>
+              </span>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;padding:0 2px">
+            <span style="font-size:15px;font-weight:600;line-height:1.35;text-wrap:pretty">{{ v.title }}</span>
+            <span style="font-size:13px;color:rgb(101,102,106)">{{ v.topic }}</span>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+</sc-if>
+
+<!-- ================= CATEGORY ================= -->
+<sc-if value="{{ isCat }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Collection" style="background:rgb(245,247,249)">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(24px,4vw,48px) clamp(16px,4vw,40px);display:flex;flex-wrap:wrap;gap:24px;align-items:center">
+      <div style="flex:1 1 min(100%,420px);display:flex;flex-direction:column;gap:12px">
+        <div style="font-size:12px;color:rgb(101,102,106)"><span onClick="{{ goHome }}" style="cursor:pointer;text-decoration:underline;text-underline-offset:3px">Home</span> / {{ cat }}</div>
+        <h1 style="margin:0;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(40px,6vw,72px);line-height:0.95">{{ cat }}</h1>
+        <p style="margin:0;font-size:16px;line-height:1.55;color:rgb(101,102,106);max-width:520px;text-wrap:pretty">{{ catBlurb }}</p>
+      </div>
+      <div style="flex:1 1 min(100%,420px);aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center"><sc-if value="{{ catSrc }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ catSrc }}" alt="{{ cat }}" style="width:100%;height:100%;object-fit:contain;padding:4%;box-sizing:border-box;display:block"></sc-if></div>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:24px clamp(16px,4vw,40px) clamp(48px,6vw,80px)">
+    <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding-bottom:20px;margin-bottom:24px;border-bottom:1px solid rgb(228,230,231)">
+      <div style="display:flex;gap:8px;overflow-x:auto;max-width:100%">
+        <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+          <button onClick="{{ f.go }}" style="flex:none;height:38px;padding:0 16px;border-radius:20px;font-size:13px;font-weight:500;border:1px solid {{ f.border }};background:{{ f.bg }};color:{{ f.color }}">{{ f.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <span style="font-size:13px;color:rgb(101,102,106)">{{ catCount }} products</span>
+        <select onChange="{{ setSort }}" value="{{ sort }}" style="height:38px;padding:0 12px;border-radius:8px;border:1px solid rgb(185,190,196);background:#fff;font-size:13px;color:rgb(24,26,29)">
+          <option value="featured">Featured</option>
+          <option value="low">Price: low to high</option>
+          <option value="high">Price: high to low</option>
+          <option value="area">Heating area</option>
+        </select>
+      </div>
+    </div>
+
+    <sc-if value="{{ catEmpty }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:48px 0;text-align:center;color:rgb(101,102,106);font-size:15px">No products match this filter. <span onClick="{{ clearFilter }}" style="text-decoration:underline;cursor:pointer;color:rgb(24,26,29)">Clear filters</span></div>
+    </sc-if>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(calc(50% - 8px),260px),1fr));gap:28px 16px">
+      <sc-for list="{{ catProducts }}" as="p" hint-placeholder-count="6">
+        <div onClick="{{ p.open }}" style="display:flex;flex-direction:column;gap:12px;cursor:pointer;min-width:0">
+          <div style="position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#fff;box-shadow:inset 0 0 0 1px rgb(228,230,231)">
+            <img src="{{ p.src }}" alt="{{ p.name }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8%;box-sizing:border-box;display:block">
+            <sc-if value="{{ p.onSale }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:10px;left:10px;background:#13495C;color:#fff;font-size:11px;font-weight:600;padding:4px 8px;border-radius:4px">{{ p.badge }}</span></sc-if>
+            <button onClick="{{ p.add }}" aria-label="Quick add" style="position:absolute;right:10px;bottom:10px;width:40px;height:40px;border-radius:20px;border:0;background:#fff;color:rgb(24,26,29);box-shadow:0 2px 8px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center" style-hover="background:rgb(24,26,29);color:#fff">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"></path></svg>
+            </button>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:4px;padding:0 2px">
+            <span style="font-size:12px;color:rgb(101,102,106)">{{ p.spec }}</span>
+            <span style="font-size:15px;font-weight:500;line-height:1.3;text-wrap:pretty">{{ p.name }}</span>
+            <span style="font-size:12px;color:rgb(101,102,106)">★ {{ p.rating }} ({{ p.reviews }})</span>
+            <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-top:2px">
+              <span style="font-size:16px;font-weight:600;color:{{ p.priceColor }}">{{ p.priceF }}</span>
+              <sc-if value="{{ p.onSale }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:rgb(136,139,147);text-decoration:line-through">{{ p.wasF }}</span></sc-if>
+            </div>
+            <span style="font-size:12px;color:rgb(101,102,106)">or {{ p.monthly }}/mo with financing</span>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="background:rgb(245,247,249);padding:clamp(44px,6vw,72px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px);display:flex;flex-wrap:wrap;gap:24px 56px">
+      <h2 style="flex:1 1 260px;margin:0;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(28px,3.4vw,40px);line-height:1">Questions before you buy</h2>
+      <div style="flex:2 1 min(100%,520px);border-top:1px solid rgb(24,26,29)">
+        <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="5">
+          <div style="border-bottom:1px solid rgb(228,230,231)">
+            <button onClick="{{ q.toggle }}" style="width:100%;min-height:56px;padding:14px 0;background:none;border:0;display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;font-size:15px;font-weight:600;color:rgb(24,26,29)">
+              <span>{{ q.q }}</span><span style="flex:none;font-size:20px;font-weight:400">{{ q.sign }}</span>
+            </button>
+            <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0 0 18px;font-size:14px;line-height:1.6;color:rgb(101,102,106);max-width:640px">{{ q.a }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<!-- ================= PDP ================= -->
+<sc-if value="{{ isPdp }}" hint-placeholder-val="{{ false }}">
+  <section data-screen-label="Product" style="max-width:1280px;margin:0 auto;padding:16px clamp(16px,4vw,40px) clamp(40px,6vw,72px)">
+    <div style="font-size:12px;color:rgb(101,102,106);margin-bottom:16px"><span onClick="{{ goHome }}" style="cursor:pointer;text-decoration:underline;text-underline-offset:3px">Home</span> / <span onClick="{{ goProdCat }}" style="cursor:pointer;text-decoration:underline;text-underline-offset:3px">{{ prod.cat }}</span> / {{ prod.name }}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px);align-items:flex-start">
+
+      <!-- Gallery -->
+      <div style="flex:1 1 min(100%,560px);min-width:0;display:flex;flex-direction:column;gap:10px">
+        <div style="position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#fff;box-shadow:inset 0 0 0 1px rgb(228,230,231)">
+          <sc-if value="{{ prod.src }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ prod.src }}" alt="{{ prod.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6%;box-sizing:border-box;display:block;transform:{{ galleryTransform }}"></sc-if>
+          <sc-if value="{{ prod.onSale }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:14px;left:14px;background:#13495C;color:#fff;font-size:12px;font-weight:600;padding:5px 10px;border-radius:4px">{{ prod.badge }}</span></sc-if>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px">
+          <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="4">
+            <button onClick="{{ g.go }}" aria-label="{{ g.label }}" style="aspect-ratio:1/1;border-radius:8px;padding:6px;border:2px solid {{ g.border }};background:#fff;box-shadow:inset 0 0 0 1px rgb(228,230,231);overflow:hidden;display:flex;align-items:center;justify-content:center"><sc-if value="{{ prod.src }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ prod.src }}" alt="" style="width:100%;height:100%;object-fit:contain;display:block;transform:{{ g.transform }}"></sc-if></button>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- Buy box -->
+      <div style="flex:1 1 min(100%,380px);max-width:100%;display:flex;flex-direction:column;gap:20px">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:13px;color:rgb(101,102,106)">{{ prod.cat }} · {{ prod.spec }}</span>
+          <h1 style="margin:0;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(34px,4vw,48px);line-height:0.98;text-wrap:balance">{{ prod.name }}</h1>
+          <span style="font-size:13px;color:rgb(101,102,106)"><span style="color:#13495C;letter-spacing:1px">★★★★★</span> {{ prod.rating }} · {{ prod.reviews }} reviews</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <span style="font-size:26px;font-weight:600;color:{{ prod.priceColor }}">{{ prod.priceF }}</span>
+            <sc-if value="{{ prod.onSale }}" hint-placeholder-val="{{ false }}"><span style="font-size:16px;color:rgb(136,139,147);text-decoration:line-through">{{ prod.wasF }}</span></sc-if>
+          </div>
+          <span style="font-size:13px;color:rgb(101,102,106);background:rgb(245,247,249);border-radius:8px;padding:10px 12px">As low as {{ prod.monthly }}/mo with financing. <span style="text-decoration:underline;color:rgb(24,26,29)">Check eligibility</span></span>
+        </div>
+
+        <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.5">
+          <sc-for list="{{ prod.bullets }}" as="b" hint-placeholder-count="4"><li>{{ b }}</li></sc-for>
+        </ul>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:14px;font-weight:600">Finish: <span style="font-weight:400;color:rgb(101,102,106)">{{ finishName }}</span></span>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <sc-for list="{{ finishes }}" as="o" hint-placeholder-count="2">
+              <button onClick="{{ o.go }}" style="height:44px;padding:0 18px;border-radius:24px;font-size:14px;font-weight:500;border:{{ o.border }};background:#fff;color:rgb(24,26,29)">{{ o.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:14px;font-weight:600">Add-ons</span>
+          <sc-for list="{{ addons }}" as="a" hint-placeholder-count="3">
+            <label style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;cursor:pointer;box-shadow:inset 0 0 0 1px {{ a.ring }}">
+              <input type="checkbox" checked="{{ a.on }}" onChange="{{ a.toggle }}" style="width:18px;height:18px;accent-color:rgb(24,26,29);flex:none">
+              <span style="flex:1;display:flex;flex-direction:column;gap:2px">
+                <span style="font-size:14px;font-weight:500">{{ a.name }}</span>
+                <span style="font-size:12px;color:rgb(101,102,106)">{{ a.desc }}</span>
+              </span>
+              <span style="font-size:14px;font-weight:500">+{{ a.priceF }}</span>
+            </label>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;gap:10px;align-items:stretch">
+          <div style="flex:none;display:flex;align-items:center;border-radius:28px;box-shadow:inset 0 0 0 1px rgb(185,190,196);height:53px">
+            <button onClick="{{ decQty }}" aria-label="Decrease" style="width:44px;height:53px;border:0;background:none;font-size:18px;color:rgb(24,26,29)">−</button>
+            <span style="min-width:20px;text-align:center;font-size:15px;font-weight:600">{{ qty }}</span>
+            <button onClick="{{ incQty }}" aria-label="Increase" style="width:44px;height:53px;border:0;background:none;font-size:18px;color:rgb(24,26,29)">+</button>
+          </div>
+          <button onClick="{{ addPdp }}" style="flex:1;height:53px;border-radius:28px;border:0;background:#13495C;color:#fff;font-size:15px;font-weight:600" style-hover="background:#0E3746">Add to cart · {{ pdpTotalF }}</button>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;line-height:1.5;color:rgb(101,102,106)">
+          <span><strong style="color:rgb(24,26,29);font-weight:600">Free shipping</strong> on orders over $499. Ships in 2–4 business days.</span>
+          <span><strong style="color:rgb(24,26,29);font-weight:600">Need help sizing?</strong> Talk to a heating specialist: <a href="tel:18007502723">(800) 750-2723</a></span>
+        </div>
+
+        <div style="border-top:1px solid rgb(228,230,231)">
+          <sc-for list="{{ accordions }}" as="q" hint-placeholder-count="4">
+            <div style="border-bottom:1px solid rgb(228,230,231)">
+              <button onClick="{{ q.toggle }}" style="width:100%;min-height:56px;padding:14px 0;background:none;border:0;display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;font-size:15px;font-weight:600;color:rgb(24,26,29)">
+                <span>{{ q.title }}</span><span style="flex:none;font-size:20px;font-weight:400">{{ q.sign }}</span>
+              </button>
+              <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+                <div style="padding:0 0 18px;display:flex;flex-direction:column;gap:0">
+                  <sc-for list="{{ q.rows }}" as="row" hint-placeholder-count="3">
+                    <div style="display:flex;justify-content:space-between;gap:16px;padding:9px 0;border-bottom:1px solid rgb(245,247,249);font-size:14px;line-height:1.5">
+                      <span style="color:rgb(101,102,106)">{{ row.k }}</span><span style="text-align:right;font-weight:500">{{ row.v }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pairs well -->
+  <section style="background:rgb(245,247,249);padding:clamp(40px,6vw,64px) 0">
+    <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px)">
+      <h2 style="margin:0 0 24px;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(28px,3.4vw,40px);line-height:1">Complete your install</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(calc(50% - 8px),260px),1fr));gap:28px 16px">
+        <sc-for list="{{ related }}" as="p" hint-placeholder-count="4">
+          <div onClick="{{ p.open }}" style="display:flex;flex-direction:column;gap:12px;cursor:pointer;min-width:0">
+            <div style="position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;background:#fff">
+              <img src="{{ p.src }}" alt="{{ p.name }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8%;box-sizing:border-box;display:block">
+              <button onClick="{{ p.add }}" aria-label="Quick add" style="position:absolute;right:10px;bottom:10px;width:40px;height:40px;border-radius:20px;border:0;background:#fff;color:rgb(24,26,29);box-shadow:0 2px 8px rgba(0,0,0,0.15);display:flex;align-items:center;justify-content:center" style-hover="background:rgb(24,26,29);color:#fff">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"></path></svg>
+              </button>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:4px;padding:0 2px">
+              <span style="font-size:12px;color:rgb(101,102,106)">{{ p.spec }}</span>
+              <span style="font-size:15px;font-weight:500;line-height:1.3">{{ p.name }}</span>
+              <span style="font-size:16px;font-weight:600;color:{{ p.priceColor }}">{{ p.priceF }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section style="max-width:1280px;margin:0 auto;padding:clamp(40px,6vw,72px) clamp(16px,4vw,40px)">
+    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px">
+      <div>
+        <h2 style="margin:0;font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(28px,3.4vw,40px);line-height:1">Customer reviews</h2>
+        <span style="font-size:14px;color:rgb(101,102,106)">{{ prod.rating }} out of 5 · {{ prod.reviews }} reviews</span>
+      </div>
+      <button style="height:44px;padding:0 24px;border-radius:28px;border:1px solid rgb(24,26,29);background:#fff;color:rgb(24,26,29);font-size:14px;font-weight:600">Write a review</button>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px">
+      <sc-for list="{{ pdpReviews }}" as="r" hint-placeholder-count="3">
+        <div style="padding:20px 0;border-top:1px solid rgb(228,230,231);display:flex;flex-direction:column;gap:8px">
+          <span style="color:#13495C;font-size:13px;letter-spacing:2px">★★★★★</span>
+          <span style="font-size:16px;font-weight:600">{{ r.title }}</span>
+          <span style="font-size:12px;color:rgb(136,139,147)">{{ r.who }} · Verified buyer</span>
+          <p style="margin:4px 0 0;font-size:14px;line-height:1.6;color:rgb(101,102,106);text-wrap:pretty">{{ r.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+    <div style="height:84px"></div>
+    <div style="position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;box-shadow:0 -4px 16px rgba(0,0,0,0.12);padding:12px 16px calc(12px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:12px">
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+        <span style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ prod.name }}</span>
+        <span style="font-size:15px;font-weight:600;color:{{ prod.priceColor }}">{{ pdpTotalF }}</span>
+      </div>
+      <button onClick="{{ addPdp }}" style="flex:none;height:48px;padding:0 24px;border-radius:28px;border:0;background:#13495C;color:#fff;font-size:15px;font-weight:600">Add to cart</button>
+    </div>
+  </sc-if>
+</sc-if>
+
+<!-- Newsletter -->
+<section style="background:#13495C;color:#fff;padding:clamp(40px,6vw,64px) 0">
+  <div style="max-width:720px;margin:0 auto;padding:0 clamp(16px,4vw,40px);text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px">
+    
+    <h2 style="margin: 0; font-family: 'Ringside Condensed','Ringside','Barlow Condensed',sans-serif; font-weight: 700; text-transform: uppercase; font-size: clamp(20px,4vw,44px); line-height: 1">Get 10% off your first order</h2><p style="margin:0;font-size:15px;line-height:1.5;color:rgba(255,255,255,0.92)">Seasonal deals, burn tips and maintenance reminders. No spam.</p>
+    <sc-if value="{{ subscribed }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:8px;font-size:15px;font-weight:600">You're on the list. Check your inbox for your code.</div>
+    </sc-if>
+    <sc-if value="{{ notSubscribed }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-wrap:wrap;gap:10px;width:100%;max-width:480px;margin-top:8px">
+        <input type="email" placeholder="Email address" value="{{ email }}" onChange="{{ setEmail }}" style="flex:1 1 220px;height:53px;padding:0 20px;border-radius:28px;border:0;font-size:15px;color:rgb(24,26,29);outline:none">
+        <button onClick="{{ subscribe }}" style="flex:1 1 120px;height:53px;padding:0 28px;border-radius:28px;border:0;background:rgb(24,26,29);color:#fff;font-size:15px;font-weight:600">Sign up</button>
+      </div>
+    </sc-if>
+  </div>
+</section>
+
+</main>
+
+<!-- Footer -->
+<footer style="background:rgb(24,26,29);color:#fff;padding:clamp(40px,6vw,64px) 0 24px">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(16px,4vw,40px)">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(calc(50% - 12px),180px),1fr));gap:32px 24px">
+      <div style="display:flex;flex-direction:column;gap:14px;grid-column:1/-1;max-width:360px">
+        <img src="assets/us-stove-logo.jpeg" alt="United States Stove Co." style="height:56px;width:auto;align-self:flex-start">
+        <span style="font-size:13px;line-height:1.6;color:rgb(168,172,177)">South Pittsburg, Tennessee · Est. 1869</span>
+      </div>
+      <sc-for list="{{ footerCols }}" as="col" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em">{{ col.title }}</span>
+          <sc-for list="{{ col.links }}" as="l" hint-placeholder-count="5">
+            <span onClick="{{ l.go }}" style="font-size:14px;color:rgb(168,172,177);cursor:pointer" style-hover="color:#fff">{{ l.label }}</span>
+          </sc-for>
+        </div>
+      </sc-for>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <span style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em">Contact</span>
+        <span style="font-size:14px;color:rgb(168,172,177)">(800) 750-2723</span>
+        <span style="font-size:14px;color:rgb(168,172,177)">Mon–Fri, 8am–5pm CT</span>
+        <span style="font-size:14px;color:rgb(168,172,177);text-decoration:underline;text-underline-offset:3px;cursor:pointer">Find a dealer near you</span>
+      </div>
+    </div>
+    <div style="margin-top:40px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-size:12px;color:rgb(136,139,147)">
+      <span>© 2026 United States Stove Company. All rights reserved.</span>
+      <div style="display:flex;flex-wrap:wrap;gap:16px"><span>Privacy Policy</span><span>Terms of Service</span><span>Accessibility</span><span>Prop 65</span></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile menu drawer -->
+<sc-if value="{{ menu }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeMenu }}" style="position:fixed;inset:0;z-index:60;background:rgba(0,0,0,0.5)"></div>
+  <aside style="position:fixed;top:0;left:0;bottom:0;z-index:61;width:min(86vw,360px);background:#fff;display:flex;flex-direction:column;overflow-y:auto">
+    <div style="height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 16px;border-bottom:1px solid rgb(228,230,231)">
+      <img src="assets/us-stove-logo.jpeg" alt="United States Stove Co." style="height:36px;width:auto">
+      <button onClick="{{ closeMenu }}" aria-label="Close" style="width:44px;height:44px;background:none;border:0;display:flex;align-items:center;justify-content:center;color:rgb(24,26,29)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    </div>
+    <div style="padding:8px 16px">
+      <span onClick="{{ goSale }}" style="display:flex;align-items:center;min-height:52px;font-size:16px;font-weight:600;color:#13495C;border-bottom:1px solid rgb(245,247,249);cursor:pointer">Sale</span>
+      <sc-for list="{{ categories }}" as="c" hint-placeholder-count="10">
+        <span onClick="{{ c.go }}" style="display:flex;align-items:center;justify-content:space-between;min-height:52px;font-size:16px;font-weight:500;border-bottom:1px solid rgb(245,247,249);cursor:pointer">{{ c.name }}<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"></path></svg></span>
+      </sc-for>
+    </div>
+    <div style="margin-top:auto;padding:20px 16px;background:rgb(245,247,249);display:flex;flex-direction:column;gap:8px;font-size:14px">
+      <span style="font-weight:600">Need help choosing?</span>
+      <span style="color:rgb(101,102,106)">Call (800) 750-2723</span>
+    </div>
+  </aside>
+</sc-if>
+
+<!-- Cart drawer -->
+<sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeCart }}" style="position:fixed;inset:0;z-index:60;background:rgba(0,0,0,0.5)"></div>
+  <aside style="position:fixed;top:0;right:0;bottom:0;z-index:61;width:min(100vw,420px);background:#fff;display:flex;flex-direction:column">
+    <div style="height:64px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 8px 0 20px;border-bottom:1px solid rgb(228,230,231)">
+      <span style="font-family:'Ringside Condensed','Ringside','Barlow Condensed',sans-serif;font-weight:700;text-transform:uppercase;font-size:24px">Your cart ({{ cartCount }})</span>
+      <button onClick="{{ closeCart }}" aria-label="Close" style="width:44px;height:44px;background:none;border:0;display:flex;align-items:center;justify-content:center;color:rgb(24,26,29)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+      </button>
+    </div>
+    <div style="flex:none;padding:12px 20px;background:rgb(245,247,249);font-size:13px;color:rgb(101,102,106)">{{ shipMsg }}</div>
+    <div style="flex:1;overflow-y:auto;padding:8px 20px">
+      <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}">
+        <div style="padding:48px 0;text-align:center;display:flex;flex-direction:column;gap:16px;align-items:center">
+          <span style="font-size:15px;color:rgb(101,102,106)">Your cart is empty.</span>
+          <button onClick="{{ goWood }}" style="height:48px;padding:0 28px;border-radius:28px;border:0;background:rgb(24,26,29);color:#fff;font-size:15px;font-weight:600">Shop wood stoves</button>
+        </div>
+      </sc-if>
+      <sc-for list="{{ cartLines }}" as="l" hint-placeholder-count="0">
+        <div style="display:flex;gap:14px;padding:16px 0;border-bottom:1px solid rgb(228,230,231)">
+          <div style="flex:none;width:72px;height:72px;border-radius:8px;background:#fff;box-shadow:inset 0 0 0 1px rgb(228,230,231);overflow:hidden"><img loading="lazy" src="{{ l.src }}" alt="" style="width:100%;height:100%;object-fit:contain;padding:6px;box-sizing:border-box;display:block"></div>
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
+            <span style="font-size:14px;font-weight:500;line-height:1.3">{{ l.name }}</span>
+            <span style="font-size:12px;color:rgb(101,102,106)">{{ l.meta }}</span>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">
+              <div style="display:flex;align-items:center;border-radius:20px;box-shadow:inset 0 0 0 1px rgb(185,190,196);height:36px">
+                <button onClick="{{ l.dec }}" style="width:34px;height:36px;border:0;background:none;color:rgb(24,26,29)">−</button>
+                <span style="min-width:16px;text-align:center;font-size:13px;font-weight:600">{{ l.qty }}</span>
+                <button onClick="{{ l.inc }}" style="width:34px;height:36px;border:0;background:none;color:rgb(24,26,29)">+</button>
+              </div>
+              <span style="font-size:14px;font-weight:600">{{ l.totalF }}</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:none;padding:16px 20px calc(16px + env(safe-area-inset-bottom));border-top:1px solid rgb(228,230,231);display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:600"><span>Subtotal</span><span>{{ subtotalF }}</span></div>
+        <span style="font-size:12px;color:rgb(101,102,106)">Taxes and shipping calculated at checkout.</span>
+        <button style="height:53px;border-radius:28px;border:0;background:#13495C;color:#fff;font-size:15px;font-weight:600">Checkout</button>
+      </div>
+    </sc-if>
+  </aside>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const P = [
+  {id:'w1',cat:'Wood Stoves',name:'Small EPA Wood Stove',spec:'Up to 1,200 sq ft',sqft:1200,price:699,was:799,rating:4.7,reviews:412,epa:true,img:'product photo · small wood stove',btu:'54,000 BTU',burn:'Up to 8 hrs',log:'16 in'},
+  {id:'w2',cat:'Wood Stoves',name:'Medium EPA Wood Stove with Blower',spec:'Up to 1,800 sq ft',sqft:1800,price:999,was:1149,rating:4.8,reviews:683,epa:true,img:'product photo · medium wood stove',btu:'75,000 BTU',burn:'Up to 10 hrs',log:'18 in'},
+  {id:'w3',cat:'Wood Stoves',name:'Large EPA Wood Stove',spec:'Up to 2,500 sq ft',sqft:2500,price:1399,was:1599,rating:4.8,reviews:297,epa:true,img:'product photo · large wood stove',btu:'110,000 BTU',burn:'Up to 12 hrs',log:'21 in'},
+  {id:'w4',cat:'Wood Stoves',name:'Cast Iron Parlor Wood Stove',spec:'Up to 1,000 sq ft',sqft:1000,price:849,was:849,rating:4.6,reviews:158,epa:true,img:'product photo · cast iron parlor stove',btu:'45,000 BTU',burn:'Up to 6 hrs',log:'14 in'},
+  {id:'w5',cat:'Wood Stoves',name:'Wood Stove Fireplace Insert',spec:'Up to 2,000 sq ft',sqft:2000,price:1199,was:1299,rating:4.5,reviews:204,epa:true,img:'product photo · fireplace insert',btu:'85,000 BTU',burn:'Up to 10 hrs',log:'18 in'},
+  {id:'w6',cat:'Wood Stoves',name:'Shop & Garage Wood Stove',spec:'Up to 3,000 sq ft',sqft:3000,price:579,was:579,rating:4.4,reviews:521,epa:false,img:'product photo · steel shop stove',btu:'125,000 BTU',burn:'Up to 8 hrs',log:'24 in'},
+  {id:'p1',cat:'Pellet Stoves',name:'Pellet Stove, 40 lb Hopper',spec:'Up to 1,500 sq ft',sqft:1500,price:1299,was:1449,rating:4.6,reviews:388,epa:true,img:'product photo · compact pellet stove',btu:'35,000 BTU',burn:'Up to 24 hrs',log:'—'},
+  {id:'p2',cat:'Pellet Stoves',name:'Pellet Stove, 80 lb Hopper',spec:'Up to 2,200 sq ft',sqft:2200,price:1699,was:1899,rating:4.7,reviews:271,epa:true,img:'product photo · large pellet stove',btu:'50,000 BTU',burn:'Up to 48 hrs',log:'—'},
+  {id:'p3',cat:'Pellet Stoves',name:'Wi-Fi Smart Pellet Stove',spec:'Up to 2,000 sq ft',sqft:2000,price:1899,was:1899,rating:4.5,reviews:119,epa:true,img:'product photo · smart pellet stove',btu:'48,000 BTU',burn:'Up to 36 hrs',log:'—'},
+  {id:'g1',cat:'Gas Heaters',name:'Vent-Free Propane Wall Heater',spec:'Up to 1,000 sq ft',sqft:1000,price:249,was:299,rating:4.5,reviews:902,epa:false,img:'product photo · gas wall heater',btu:'30,000 BTU',burn:'Thermostatic',log:'—'},
+  {id:'g2',cat:'Gas Heaters',name:'Dual-Fuel Blue Flame Heater',spec:'Up to 1,000 sq ft',sqft:1000,price:299,was:349,rating:4.6,reviews:466,epa:false,img:'product photo · blue flame heater',btu:'30,000 BTU',burn:'Thermostatic',log:'—'},
+  {id:'g3',cat:'Gas Heaters',name:'Gas Log Fireplace Set',spec:'Up to 900 sq ft',sqft:900,price:449,was:449,rating:4.4,reviews:133,epa:false,img:'product photo · gas log set',btu:'28,000 BTU',burn:'Remote control',log:'—'},
+  {id:'f1',cat:'Wood Furnaces',name:'Add-On Wood Furnace',spec:'Up to 2,500 sq ft',sqft:2500,price:2299,was:2499,rating:4.6,reviews:142,epa:true,img:'product photo · wood furnace',btu:'100,000 BTU',burn:'Up to 12 hrs',log:'24 in'},
+  {id:'f2',cat:'Wood Furnaces',name:'Wood & Coal Furnace',spec:'Up to 3,000 sq ft',sqft:3000,price:2699,was:2699,rating:4.5,reviews:87,epa:true,img:'product photo · multi-fuel furnace',btu:'120,000 BTU',burn:'Up to 14 hrs',log:'24 in'},
+  {id:'c1',cat:'Coal Stoves',name:'Hand-Fed Coal Stove',spec:'Up to 1,800 sq ft',sqft:1800,price:1099,was:1199,rating:4.6,reviews:96,epa:false,img:'product photo · coal stove',btu:'80,000 BTU',burn:'Up to 24 hrs',log:'—'},
+  {id:'r1',cat:'Circulators',name:'Wood Circulator Heater',spec:'Up to 1,500 sq ft',sqft:1500,price:899,was:899,rating:4.5,reviews:73,epa:true,img:'product photo · cabinet circulator',btu:'65,000 BTU',burn:'Up to 8 hrs',log:'18 in'},
+  {id:'x1',cat:'Fire Pits',name:'30 in Steel Fire Pit',spec:'Outdoor · wood burning',sqft:0,price:149,was:179,rating:4.7,reviews:640,epa:false,img:'product photo · steel fire pit',btu:'—',burn:'—',log:'20 in'},
+  {id:'x2',cat:'Camp Stoves',name:'Portable Camp Stove',spec:'Cabins, tents & job sites',sqft:0,price:189,was:189,rating:4.6,reviews:350,epa:false,img:'product photo · camp stove',btu:'—',burn:'—',log:'12 in'},
+  {id:'h1',cat:'Heating Pellets',name:'Premium Wood Pellets, 40 lb',spec:'Low ash hardwood',sqft:0,price:7.99,was:7.99,rating:4.8,reviews:1204,epa:false,img:'product photo · pellet bag',btu:'—',burn:'—',log:'—'},
+  {id:'a1',cat:'Parts & Accessories',name:'Universal Stove Blower Kit',spec:'Fits most models',sqft:0,price:129,was:129,rating:4.6,reviews:388,epa:false,img:'product photo · blower kit',btu:'—',burn:'—',log:'—'},
+  {id:'a2',cat:'Parts & Accessories',name:'Stove Pipe Kit, 6 in',spec:'Black steel',sqft:0,price:89,was:89,rating:4.5,reviews:221,epa:false,img:'product photo · stove pipe',btu:'—',burn:'—',log:'—'},
+  {id:'a3',cat:'Parts & Accessories',name:'Hearth Pad, 36 × 52 in',spec:'UL listed',sqft:0,price:149,was:149,rating:4.7,reviews:162,epa:false,img:'product photo · hearth pad',btu:'—',burn:'—',log:'—'},
+  {id:'a4',cat:'Parts & Accessories',name:'Replacement Door Gasket Kit',spec:'Fits most models',sqft:0,price:24.99,was:24.99,rating:4.6,reviews:510,epa:false,img:'product photo · gasket kit',btu:'—',burn:'—',log:'—'}
+];
+const CATS = ['Wood Stoves','Pellet Stoves','Wood Furnaces','Gas Heaters','Coal Stoves','Circulators','Fire Pits','Camp Stoves','Heating Pellets','Parts & Accessories'];
+const CAT_IMG = {
+  'Wood Stoves':'assets/cat-wood-stove.jpg',
+  'Pellet Stoves':'assets/cat-pellet-stove.jpeg',
+  'Wood Furnaces':'assets/cat-wood-furnace.jpg',
+  'Gas Heaters':'assets/cat-heater-c190k.jpg',
+  'Coal Stoves':'assets/cat-coal-stove.jpg',
+  'Fire Pits':'assets/cat-fire-pit.jpeg',
+  'Circulators':'assets/cat-circulator.jpg',
+  'Camp Stoves':'assets/cat-camp-stove.jpeg',
+  'Heating Pellets':'assets/cat-pellets.jpg',
+  'Parts & Accessories':'assets/cat-parts.jpeg'
+};
+const A = p => { try { const el = document.querySelector('img[data-asset="'+p+'"]'); return (el && el.getAttribute('src')) || p; } catch(e) { return p; } };
+const IMGP = p => p ? A(p) : '';
+const BLURB = {
+  'Wood Stoves':'EPA-certified wood stoves sized from cozy cabins to open-plan homes. Long burn times, big viewing windows and parts support for years to come.',
+  'Pellet Stoves':'Set-it-and-forget-it heat. Automatic feed, thermostat control and hoppers that run for a day or more.',
+  'Wood Furnaces':'Whole-home heat through your existing ductwork, as an add-on or a standalone system.',
+  'Gas Heaters':'Vent-free and vented propane and natural gas heaters for reliable heat without the wood pile.',
+  'Coal Stoves':'Steady, long-burning coal heat for homes, shops and outbuildings.',
+  'Circulators':'Cabinet-style circulators that move warm air through the room for even heat.',
+  'Fire Pits':'Durable steel fire pits for the patio, backyard and campsite.',
+  'Camp Stoves':'Portable stoves for tents, hunting cabins and job sites.',
+  'Heating Pellets':'Clean-burning hardwood pellets for consistent heat and less ash.',
+  'Parts & Accessories':'Blowers, pipe, gaskets, hearth pads and genuine replacement parts.'
+};
+const ADDONS = [
+  {id:'blower',name:'Blower kit',desc:'Moves heat further into the room',price:129},
+  {id:'pad',name:'Hearth pad, 36 × 52 in',desc:'UL-listed floor protection',price:149},
+  {id:'pipe',name:'6 in stove pipe kit',desc:'Everything to connect to your chimney',price:89}
+];
+const GALLERY = ['front 3/4','door open','side profile','in room'];
+const GT = ['none','scale(1.35)','scaleX(-1)','scale(0.85)'];
+const FINISH = ['Matte black','Black with nickel trim'];
+const money = n => '$' + n.toLocaleString('en-US',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2});
+const INK='rgb(24,26,29)', RED='#13495C';
+
+class Component extends DCLogic {
+  state = {page:'home',cat:'Wood Stoves',pid:'w2',tab:'wood',wide:false,menu:false,cartOpen:false,cart:[],filter:'all',sort:'featured',img:0,finish:0,addons:{},qty:1,acc:'overview',faq:0,email:'',subscribed:false};
+  componentDidMount(){ this.onR=()=>this.setState({wide:window.innerWidth>=1080}); window.addEventListener('resize',this.onR); this.onR(); setTimeout(()=>this.forceUpdate(),0); }
+  componentWillUnmount(){ window.removeEventListener('resize',this.onR); }
+  go(patch){ this.setState(Object.assign({menu:false,cartOpen:false},patch)); try{window.scrollTo(0,0)}catch(e){} }
+  goCat(cat){ this.go({page:'category',cat,filter:'all',sort:'featured',faq:0}); }
+  openP(id){ this.go({page:'pdp',pid:id,img:0,finish:0,addons:{},qty:1,acc:'overview'}); }
+  addToCart(p,qty,addons,finish){
+    const key=p.id+'|'+(finish||'')+'|'+(addons||[]).join(',');
+    this.setState(s=>{
+      const cart=s.cart.slice(); const i=cart.findIndex(l=>l.key===key);
+      const unit=p.price+(addons||[]).reduce((t,a)=>t+ADDONS.find(x=>x.id===a).price,0);
+      if(i>=0) cart[i]=Object.assign({},cart[i],{qty:cart[i].qty+qty}); else cart.push({key,src:CAT_IMG[p.cat]||'',name:p.name,unit,qty,meta:[finish].concat((addons||[]).map(a=>ADDONS.find(x=>x.id===a).name)).filter(Boolean).join(' · ')||p.spec});
+      return {cart,cartOpen:true,menu:false};
+    });
+  }
+  card(p){
+    const sale=p.was>p.price;
+    return Object.assign({},p,{src:IMGP(CAT_IMG[p.cat]),onSale:sale,badge:sale?money(p.was-p.price)+' off':'',priceF:money(p.price),wasF:money(p.was),priceColor:sale?'#13495C':INK,monthly:money(Math.max(1,Math.round(p.price/24))),
+      open:()=>this.openP(p.id),add:e=>{e&&e.stopPropagation&&e.stopPropagation();this.addToCart(p,1);}});
+  }
+  renderVals(){
+    const s=this.state;
+    const tabCat={wood:'Wood Stoves',pellet:'Pellet Stoves',gas:'Gas Heaters'}[s.tab];
+    const tabProducts=P.filter(p=>p.cat===tabCat).slice(0,4).map(p=>this.card(p));
+    const fdefs=[{id:'all',label:'All'},{id:'s',label:'Up to 1,200 sq ft'},{id:'m',label:'1,200–2,000 sq ft'},{id:'l',label:'2,000+ sq ft'},{id:'sale',label:'On sale'},{id:'epa',label:'EPA certified'}];
+    const test={all:()=>true,s:p=>p.sqft&&p.sqft<=1200,m:p=>p.sqft>1200&&p.sqft<=2000,l:p=>p.sqft>2000,sale:p=>p.was>p.price,epa:p=>p.epa};
+    let list=P.filter(p=>p.cat===s.cat).filter(test[s.filter]);
+    if(s.sort==='low') list=list.slice().sort((a,b)=>a.price-b.price);
+    if(s.sort==='high') list=list.slice().sort((a,b)=>b.price-a.price);
+    if(s.sort==='area') list=list.slice().sort((a,b)=>b.sqft-a.sqft);
+    const prodRaw=P.find(p=>p.id===s.pid)||P[1];
+    const prod=this.card(prodRaw);
+    prod.bullets=[prodRaw.spec+' heating area', prodRaw.btu!=='—'?prodRaw.btu+' max output':'Built for years of use', prodRaw.burn!=='—'?prodRaw.burn+' burn time':'Ships ready to use', prodRaw.epa?'EPA certified, eligible for federal tax credit where applicable':'Backed by our limited warranty'];
+    const chosen=ADDONS.filter(a=>s.addons[a.id]);
+    const unit=prodRaw.price+chosen.reduce((t,a)=>t+a.price,0);
+    const sub=s.cart.reduce((t,l)=>t+l.unit*l.qty,0);
+    const count=s.cart.reduce((t,l)=>t+l.qty,0);
+    const setQty=(key,d)=>this.setState(st=>({cart:st.cart.map(l=>l.key===key?Object.assign({},l,{qty:l.qty+d}):l).filter(l=>l.qty>0)}));
+    const accDefs=[
+      {id:'overview',title:'Overview',rows:[{k:'Fuel',v:prodRaw.cat.replace(/s$/,'')},{k:'Heating area',v:prodRaw.spec},{k:'Ideal for',v:'Homes, cabins, workshops'}]},
+      {id:'specs',title:'Specifications',rows:[{k:'Max output',v:prodRaw.btu},{k:'Burn time',v:prodRaw.burn},{k:'Max log length',v:prodRaw.log},{k:'Flue size',v:'6 in'},{k:'EPA certified',v:prodRaw.epa?'Yes':'No'}]},
+      {id:'ship',title:'Shipping & delivery',rows:[{k:'Ships in',v:'2–4 business days'},{k:'Method',v:'Freight, curbside'},{k:'Free shipping',v:'Orders over $499'}]},
+      {id:'warranty',title:'Warranty & support',rows:[{k:'Limited warranty',v:'See product manual'},{k:'Replacement parts',v:'Available online'},{k:'Support',v:'(800) 750-2723'}]}
+    ];
+    const faqDefs=[
+      {q:'What size stove do I need?',a:'Start with the square footage you want to heat, then factor in ceiling height, insulation and climate. Each product lists its heating area; when in doubt, call our team and we will help you size it.'},
+      {q:'Do I need an EPA-certified stove?',a:'Most residential installs in the U.S. require an EPA-certified appliance. Certified stoves also burn cleaner and use less wood.'},
+      {q:'Can I install it myself?',a:'Many customers do, but local codes and permits vary. We recommend a certified installer and an inspection by your local building authority.'},
+      {q:'How does shipping work?',a:'Stoves ship by freight with curbside delivery. Orders over $499 ship free to the contiguous U.S.'},
+      {q:'Where can I find replacement parts?',a:'Shop Parts & Accessories or search by your model number. Gaskets, blowers, glass and firebrick are available for most current and past models.'}
+    ];
+    return {
+      wide:s.wide, narrow:!s.wide, isHome:s.page==='home', isCat:s.page==='category', isPdp:s.page==='pdp',
+      menu:s.menu, cartOpen:s.cartOpen,
+      openMenu:()=>this.setState({menu:true}), closeMenu:()=>this.setState({menu:false}),
+      openCart:()=>this.setState({cartOpen:true}), closeCart:()=>this.setState({cartOpen:false}),
+      goHome:()=>this.go({page:'home'}), goWood:()=>this.goCat('Wood Stoves'),
+      goSale:()=>{this.goCat('Wood Stoves');this.setState({filter:'sale'});},
+      goFirePits:()=>this.goCat('Fire Pits'), goCamp:()=>this.goCat('Camp Stoves'),
+      navItems:[{label:'Sale',color:'#9CCADB',go:()=>{this.goCat('Wood Stoves');this.setState({filter:'sale'});}}].concat(['Wood Stoves','Pellet Stoves','Wood Furnaces','Gas Heaters','Coal Stoves','Fire Pits','Parts & Accessories'].map(c=>({label:c,color:'#fff',go:()=>this.goCat(c)}))),
+      categories:CATS.map(c=>({name:c,img:c.toLowerCase(),src:IMGP(CAT_IMG[c]),hasSrc:!!CAT_IMG[c],noSrc:!CAT_IMG[c],go:()=>this.goCat(c)})),
+      tabs:[{id:'wood',label:'Wood stoves'},{id:'pellet',label:'Pellet stoves'},{id:'gas',label:'Gas heaters'}].map(t=>({label:t.label,bg:s.tab===t.id?'#fff':'transparent',border:s.tab===t.id?INK:'transparent',go:()=>this.setState({tab:t.id})})),
+      tabProducts,
+      perks:[
+        {n:'01',title:'Free shipping over $499',body:'Freight delivery to the contiguous U.S. on qualifying orders.'},
+        {n:'02',title:'Flexible financing',body:'Spread the cost over monthly payments with approved credit.'},
+        {n:'03',title:'Curbside delivery',body:'Freight carrier calls ahead to schedule, then delivers to the curb or end of your driveway.'},
+        {n:'04',title:'Parts for the long haul',body:'Genuine replacement parts for current and past models.'}
+      ],
+      testimonials:[
+        {quote:'Heats our whole farmhouse through January. We barely touch the furnace anymore.',who:'Dale, Vermont',product:'Large EPA Wood Stove'},
+        {quote:'Fill the hopper in the morning and it runs all day. Easiest heat we have ever had.',who:'Karen, Ohio',product:'Pellet Stove, 80 lb Hopper'},
+        {quote:'Ordered a gasket on Monday, had it by Thursday. Stove is 15 years old and still going.',who:'Marcus, Tennessee',product:'Replacement parts'}
+      ],
+      videos:[
+        {title:'How to assemble a wood stove with legs',short:'',topic:'Wood stoves · Assembly',thumb:'assets/video-assemble-wood-stove.png',url:'https://www.youtube.com/@usstove/search?query=assemble%20wood%20stove%20legs'},
+        {title:'How to install a stove blower kit',short:'Install a blower kit',topic:'Parts & accessories',thumb:'',url:'https://www.youtube.com/@usstove/search?query=blower'},
+        {title:'How to replace a door gasket',short:'Replace a door gasket',topic:'Maintenance',thumb:'',url:'https://www.youtube.com/@usstove/search?query=gasket'},
+        {title:'How to start a fire in your pellet stove',short:'Start a pellet stove',topic:'Pellet stoves',thumb:'',url:'https://www.youtube.com/@usstove/search?query=pellet%20stove'},
+        {title:'How to clean your stove for the season',short:'Clean your stove',topic:'Maintenance',thumb:'',url:'https://www.youtube.com/@usstove/search?query=clean'}
+      ].map(v=>Object.assign({},v,{thumb:IMGP(v.thumb),hasThumb:!!v.thumb,noThumb:!v.thumb})),
+      cat:s.cat, catBlurb:BLURB[s.cat], catCount:list.length, catEmpty:list.length===0, catProducts:list.map(p=>this.card(p)),
+      filters:fdefs.map(f=>({label:f.label,bg:s.filter===f.id?INK:'#fff',color:s.filter===f.id?'#fff':INK,border:s.filter===f.id?INK:'rgb(185,190,196)',go:()=>this.setState({filter:f.id})})),
+      clearFilter:()=>this.setState({filter:'all'}),
+      sort:s.sort, setSort:e=>this.setState({sort:e.target.value}),
+      faqs:faqDefs.map((f,i)=>Object.assign({},f,{open:s.faq===i,sign:s.faq===i?'−':'+',toggle:()=>this.setState({faq:s.faq===i?-1:i})})),
+      prod, goProdCat:()=>this.goCat(prodRaw.cat),
+      galleryLabel:GALLERY[s.img], galleryTransform:GT[s.img], catSrc:IMGP(CAT_IMG[s.cat]),
+      gallery:GALLERY.map((g,i)=>({label:g,transform:GT[i],border:s.img===i?INK:'transparent',go:()=>this.setState({img:i})})),
+      finishName:FINISH[s.finish],
+      finishes:FINISH.map((f,i)=>({label:f,border:s.finish===i?'2px solid '+INK:'1px solid rgb(185,190,196)',go:()=>this.setState({finish:i})})),
+      addons:ADDONS.map(a=>({name:a.name,desc:a.desc,priceF:money(a.price),on:!!s.addons[a.id],ring:s.addons[a.id]?INK:'rgb(228,230,231)',toggle:()=>this.setState(st=>({addons:Object.assign({},st.addons,{[a.id]:!st.addons[a.id]})}))})),
+      qty:s.qty, incQty:()=>this.setState(st=>({qty:st.qty+1})), decQty:()=>this.setState(st=>({qty:Math.max(1,st.qty-1)})),
+      pdpTotalF:money(unit*s.qty),
+      addPdp:()=>this.addToCart(prodRaw,s.qty,chosen.map(a=>a.id),FINISH[s.finish]),
+      accordions:accDefs.map(a=>Object.assign({},a,{open:s.acc===a.id,sign:s.acc===a.id?'−':'+',toggle:()=>this.setState({acc:s.acc===a.id?'':a.id})})),
+      related:['a1','a2','a3','h1'].map(id=>this.card(P.find(p=>p.id===id))),
+      pdpReviews:[
+        {title:'Heats the whole downstairs',who:'Jim R.',body:'Installed in October on a hearth pad. Keeps 1,600 sq ft comfortable overnight with one load.'},
+        {title:'Solid build, easy setup',who:'Angela M.',body:'Heavy and well made. Instructions were clear and the blower makes a real difference.'},
+        {title:'Great value',who:'Tom W.',body:'Compared several brands at this size. This one had the best burn time for the price.'}
+      ],
+      cartCount:count, hasCart:count>0, cartEmpty:count===0, subtotalF:money(sub),
+      shipMsg: sub>=499?'Your order ships free.':'You are '+money(Math.max(0,499-sub))+' away from free shipping.',
+      cartLines:s.cart.map(l=>({src:IMGP(l.src),name:l.name,meta:l.meta,qty:l.qty,totalF:money(l.unit*l.qty),inc:()=>setQty(l.key,1),dec:()=>setQty(l.key,-1)})),
+      footerCols:[
+        {title:'Shop',links:['Wood Stoves','Pellet Stoves','Wood Furnaces','Gas Heaters','Fire Pits','Parts & Accessories'].map(c=>({label:c,go:()=>this.goCat(c)}))},
+        {title:'Support',links:['Contact us','Manuals & guides','Replacement parts','Warranty registration','Shipping & returns'].map(c=>({label:c,go:()=>{}}))},
+        {title:'Company',links:['Our story','Find a dealer','Become a dealer','Careers','Heating guides'].map(c=>({label:c,go:()=>{}}))}
+      ],
+      email:s.email, setEmail:e=>this.setState({email:e.target.value}),
+      subscribed:s.subscribed, notSubscribed:!s.subscribed,
+      subscribe:()=>{ if(/\S+@\S+\.\S+/.test(s.email)) this.setState({subscribed:true}); }
+    };
+  }
+}
+</script>
+</body>
+</html>
